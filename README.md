@@ -4,7 +4,7 @@ Customer churn is one of the biggest challenges faced by subscription-based busi
 
 
 
-\## 🧠 Project Overview
+\## Project Overview
 
 Customer churn refers to when customers stop doing business with a company.  
 
@@ -18,7 +18,7 @@ By identifying these customers early, a business can take proactive steps to ret
 
 
 
-\## 🎯 Objectives
+\## Objectives
 
 \- Explore and clean telecom customer data.  
 
@@ -36,7 +36,7 @@ By identifying these customers early, a business can take proactive steps to ret
 
 
 
-\## 🧰 Tools \& Libraries
+\## Tools \& Libraries
 
 | Library | Purpose |
 
@@ -110,7 +110,7 @@ df\_encoded = pd.get\_dummies(df\_model, drop\_first=True)
 
 
 
-2️⃣ Define Features and Target
+\### \*\*2️⃣ Define Features and Target
 
 X = df\_encoded.drop('Churn\_numeric', axis=1)
 
@@ -118,7 +118,7 @@ y = df\_encoded\['Churn\_numeric']
 
 
 
-3️⃣ Model Building and Validation
+\### \*\*3️⃣ Model Building and Validation
 
 
 
@@ -148,7 +148,7 @@ scores = cross\_val\_score(model, X, y, cv=rskf, scoring='accuracy')
 
 
 
-4️⃣ Model Evaluation
+\### \*\*4️⃣ Model Evaluation
 
 from sklearn.metrics import (
 
@@ -228,7 +228,7 @@ Recall (0.55) shows moderate ability to identify true churners.
 
 
 
-5️⃣ SHAP Explainability
+\### \*\*5️⃣ SHAP Explainability
 
 import shap
 
@@ -262,11 +262,7 @@ Customers without internet services tend to churn less.
 
 
 
-(Optional: Add SHAP summary plot image if available.)
-
-
-
-📈 Key Takeaways
+\### \*\*📈 Key Takeaways
 
 
 
@@ -286,7 +282,7 @@ Business teams can use these insights for targeted retention campaigns.
 
 
 
-🚀 Future Enhancements
+\### \*\*🚀 Future Enhancements
 
 
 
