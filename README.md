@@ -1,14 +1,15 @@
 # Customer_Churn_Prediction_model
 Customer churn is one of the biggest challenges faced by subscription-based businesses. In this project, I built a predictive machine learning model that identifies customers who are likely to churn, using a telecom customer dataset. The goal is to help the business retain valuable customers by understanding key churn drivers.
-\# 📊 Customer Churn Prediction using Machine Learning
+
+# 📊 Customer Churn Prediction using Machine Learning
 
 
 
-\## Project Overview
+## Project Overview
 
 Customer churn refers to when customers stop doing business with a company.  
 
-This project uses \*\*machine learning and data analytics\*\* to predict which telecom customers are most likely to churn.  
+This project uses **machine learning and data analytics** to predict which telecom customers are most likely to churn.  
 
 By identifying these customers early, a business can take proactive steps to retain them.
 
@@ -18,17 +19,17 @@ By identifying these customers early, a business can take proactive steps to ret
 
 
 
-\## Objectives
+## Objectives
 
-\- Explore and clean telecom customer data.  
+- Explore and clean telecom customer data.  
 
-\- Identify key factors contributing to customer churn.  
+- Identify key factors contributing to customer churn.  
 
-\- Build a machine learning model to predict churn.  
+- Build a machine learning model to predict churn.  
 
-\- Evaluate model performance using multiple metrics.  
+- Evaluate model performance using multiple metrics.  
 
-\- Use \*\*SHAP\*\* (Explainable AI) to interpret model predictions.
+- Use **SHAP** (Explainable AI) to interpret model predictions.
 
 
 
@@ -36,21 +37,21 @@ By identifying these customers early, a business can take proactive steps to ret
 
 
 
-\## Tools \& Libraries
+## Tools & Libraries
 
 | Library | Purpose |
 
 |----------|----------|
 
-| \*\*Pandas, NumPy\*\* | Data manipulation \& analysis |
+| **Pandas, NumPy** | Data manipulation \& analysis |
 
-| \*\*Matplotlib, Seaborn, Plotly\*\* | Data visualization |
+| **Matplotlib, Seaborn, Plotly** | Data visualization |
 
-| \*\*Scikit-learn\*\* | Model training, evaluation, and cross-validation |
+| **Scikit-learn** | Model training, evaluation, and cross-validation |
 
-| \*\*SHAP\*\* | Feature importance and interpretability |
+| **SHAP** | Feature importance and interpretability |
 
-| \*\*Jupyter Notebook\*\* | Interactive development environment |
+| **Jupyter Notebook** | Interactive development environment |
 
 
 
@@ -58,9 +59,9 @@ By identifying these customers early, a business can take proactive steps to ret
 
 
 
-\## 📂 Dataset Description
+## 📂 Dataset Description
 
-\*\*Dataset:\*\* Telco Customer Churn  
+**Dataset:** Telco Customer Churn  
 
 
 
@@ -78,7 +79,7 @@ By identifying these customers early, a business can take proactive steps to ret
 
 | `Churn` | Target variable (Yes/No) |
 
-| `Churn\_numeric` | Converted target (1 = Churn, 0 = Not churn) |
+| `Churn_numeric` | Converted target (1 = Churn, 0 = Not churn) |
 
 
 
@@ -86,11 +87,11 @@ By identifying these customers early, a business can take proactive steps to ret
 
 
 
-\## ⚙️ Project Workflow
+## ⚙️ Project Workflow
 
 
 
-\### \*\*1️⃣ Data Preprocessing\*\*
+### **1️⃣ Data Preprocessing**
 
 \- Dropped irrelevant columns (`customerID`).  
 
@@ -107,78 +108,78 @@ By identifying these customers early, a business can take proactive steps to ret
 df\_model = df.drop("Churn", axis=1)
 
 df\_encoded = pd.get\_dummies(df\_model, drop\_first=True)
+```
 
-
-
-\### \*\*2️⃣ Define Features and Target
+### **2️⃣ Define Features and Target
+```python
 
 X = df\_encoded.drop('Churn\_numeric', axis=1)
 
 y = df\_encoded\['Churn\_numeric']
+```
 
 
-
-\### \*\*3️⃣ Model Building and Validation
+### **3️⃣ Model Building and Validation**
 
 
 
 Used Logistic Regression and cross-validation strategies to ensure robust evaluation.
 
+```python
 
+from sklearn.linear_model import LogisticRegression
 
-from sklearn.linear\_model import LogisticRegression
-
-from sklearn.model\_selection import StratifiedKFold, RepeatedStratifiedKFold, cross\_val\_score
-
-
-
-model = LogisticRegression(max\_iter=1000, solver='liblinear')
+from sklearn.model_selection import StratifiedKFold, RepeatedStratifiedKFold, cross_val_score
 
 
 
-skf = StratifiedKFold(n\_splits=5, shuffle=True, random\_state=42)
-
-scores = cross\_val\_score(model, X, y, cv=skf, scoring='accuracy')
+model = LogisticRegression(max_iter=1000, solver='liblinear')
 
 
 
-rskf = RepeatedStratifiedKFold(n\_splits=5, n\_repeats=3, random\_state=42)
+skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
-scores = cross\_val\_score(model, X, y, cv=rskf, scoring='accuracy')
+scores = cross_val_score(model, X, y, cv=skf, scoring='accuracy')
 
 
 
-\### \*\*4️⃣ Model Evaluation
+rskf = RepeatedStratifiedKFold(n_splits=5, n_repeats=3, random_state=42)
 
+scores = cross_val_score(model, X, y, cv=rskf, scoring='accuracy')
+```
+
+
+### **4️⃣ Model Evaluation**
+```python
 from sklearn.metrics import (
 
-&nbsp;   accuracy\_score, precision\_score, recall\_score,
+&nbsp;   accuracy_score, precision_score, recall_score,
 
-&nbsp;   f1\_score, roc\_auc\_score, classification\_report, confusion\_matrix
+&nbsp;   f1_score, roc_auc_score, classification_report, confusion_matrix
 
 )
 
 
 
-y\_pred = model.predict(X\_test)
+y_pred = model.predict(X_test)
 
 
 
-print("Accuracy:", accuracy\_score(y\_test, y\_pred))
+print("Accuracy:", accuracy_score(y_test, y_pred))
 
-print("Precision:", precision\_score(y\_test, y\_pred))
+print("Precision:", precision_score(y_test, y_pred))
 
-print("Recall:", recall\_score(y\_test, y\_pred))
+print("Recall:", recall_score(y_test, y_pred))
 
-print("F1 Score:", f1\_score(y\_test, y\_pred))
+print("F1 Score:", f1_score(y_test, y_pred))
 
-print("ROC-AUC:", roc\_auc\_score(y\_test, y\_pred))
+print("ROC-AUC:", roc_auc_score(y_test, y_pred))
 
-print(classification\_report(y\_test, y\_pred))
+print(classification_report(y_test, y_pred))
 
-print(confusion\_matrix(y\_test, y\_pred))
+print(confusion_matrix(y_test, y_pred))
 
-
+```
 
 
 
@@ -204,44 +205,30 @@ Confusion Matrix:
 
 
 
-\[\[926 109]
+[[926 109]
 
-&nbsp;\[169 205]]
-
-
-
+&nbsp;[169 205]]
 
 
 Notes:
-
-
-
 The model correctly predicts ~80% of customers overall.
-
-
-
 ROC-AUC of 0.84 indicates strong discrimination ability.
-
-
-
 Recall (0.55) shows moderate ability to identify true churners.
 
-
-
-\### \*\*5️⃣ SHAP Explainability
-
+## **5️⃣ SHAP Explainability**
+```python
 import shap
 
 
 
-explainer = shap.Explainer(model, X\_train)
+explainer = shap.Explainer(model, X_train)
 
-shap\_values = explainer(X\_test)
+shap_values = explainer(X_test)
 
 
 
-shap.summary\_plot(shap\_values, X\_test)
-
+shap.summary_plot(shap_values, X_test)
+```
 
 
 
@@ -262,7 +249,7 @@ Customers without internet services tend to churn less.
 
 
 
-\### \*\*📈 Key Takeaways
+### **📈 Key Takeaways**
 
 
 
@@ -280,33 +267,9 @@ SHAP enhances transparency by showing how each feature affects predictions.
 
 Business teams can use these insights for targeted retention campaigns.
 
-
-
-\### \*\*🚀 Future Enhancements
-
-
-
-Apply ensemble models (Random Forest, XGBoost).
-
-
-
-Perform hyperparameter tuning to improve recall.
-
-
-
-Use SMOTE for handling class imbalance.
-
-
-
-Deploy the model with Streamlit or Flask for live predictions.
-
-
-
 💼 Author
-
-
-
 Sandhya Singh
 
 Data Analyst | Python | SQL | Power BI | Machine Learning
 
+LinkedIn - https://www.linkedin.com/in/sandhya-singh-b6b4b519b/
